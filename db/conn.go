@@ -3,12 +3,11 @@ package db
 import (
 	"database/sql"
 	"fmt"
-
 	_ "github.com/lib/pq"
 )
 
 const (
-	host     = "go_db"
+	host     = "godb"
 	port     = 5432
 	user     = "postgres"
 	password = ""
@@ -21,12 +20,12 @@ func ConnectDB() (*sql.DB, error) {
 
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	err = db.Ping()
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	fmt.Println("Connected to " + dbname)

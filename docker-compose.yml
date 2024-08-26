@@ -1,14 +1,14 @@
 services:
-  go-app:
-    container_name: go-app
-    image: goapi
+  goapp:
+    container_name: goapp
+    image: goapidckr
     build: .
     ports:
       - "8000:8000"
     depends_on:
-      - go_db
-  go_db:
-    container_name: go_db
+      - godb
+  godb:
+    container_name: godb
     image: postgres:16
     environment:
       POSTGRES_PASSWORD: 
@@ -21,4 +21,4 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
-  pgdata: {}
+  pgdata: { }

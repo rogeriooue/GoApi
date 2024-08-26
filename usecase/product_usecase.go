@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"goapi/repository"
 	"goapi/model"
+	"goapi/repository"
 )
 
 type ProductUsecase struct {
@@ -15,7 +15,7 @@ func NewProductUsecase(repo repository.ProductRepository) ProductUsecase {
 	}
 }
 
-func (pu *ProductUsecase) GetProducts()  ([]model.Product, error) {
+func (pu *ProductUsecase) GetProducts() ([]model.Product, error) {
 	return pu.repository.GetProducts()
 }
 

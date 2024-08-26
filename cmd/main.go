@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"goapi/controller"
-	"goapi/usecase"
 	"goapi/db"
 	"goapi/repository"
+	"goapi/usecase"
 )
 
 func main() {
@@ -19,16 +19,15 @@ func main() {
 	//repository layer
 	ProductRepository := repository.NewProductRepository(dbConnection)
 
-	//usecase layer
+	//use case layer
 	ProductUsecase := usecase.NewProductUsecase(ProductRepository)
 
 	//controllers layer
 	ProductController := controller.NewProductController(ProductUsecase)
 
 	server.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H {
+		ctx.JSON(200, gin.H{
 			"message": "pong",
-			
 		})
 	})
 

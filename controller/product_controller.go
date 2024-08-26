@@ -1,24 +1,24 @@
 package controller
 
 import (
-	"strconv"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"goapi/usecase"
 	"goapi/model"
+	"goapi/usecase"
+	"net/http"
+	"strconv"
 )
 
-type productController struct {
+type ProductController struct {
 	productUsecase usecase.ProductUsecase
 }
 
-func NewProductController(usecase usecase.ProductUsecase) productController {
-	return productController{
+func NewProductController(usecase usecase.ProductUsecase) ProductController {
+	return ProductController{
 		productUsecase: usecase,
 	}
 }
 
-func (p *productController) GetProducts(ctx *gin.Context) {
+func (p *ProductController) GetProducts(ctx *gin.Context) {
 	//mocade data
 	// products := []model.Product{
 	// 	{
@@ -30,31 +30,32 @@ func (p *productController) GetProducts(ctx *gin.Context) {
 
 	products, err := p.productUsecase.GetProducts()
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
 	}
 
 	ctx.JSON(http.StatusOK, products)
 }
 
-func (p *productController) CreateProduct(ctx *gin.Context) {
+func (p *ProductController) CreateProduct(ctx *gin.Context) {
 	var product model.Product
 
 	err := ctx.BindJSON(&product)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, err)
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	insertedProduct, err := p.productUsecase.CreateProduct(product)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	ctx.JSON(http.StatusCreated, insertedProduct)
 }
 
-func (p *productController) GetProductById(ctx *gin.Context) {
+func (p *ProductController) GetProductById(ctx *gin.Context) {
 	id := ctx.Param("productId")
 	if id == "" {
 		response := model.Response{
@@ -75,7 +76,7 @@ func (p *productController) GetProductById(ctx *gin.Context) {
 
 	product, err := p.productUsecase.GetProductById(productId)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, err)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -89,8 +90,3 @@ func (p *productController) GetProductById(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, product)
 }
-
-
-
-
-
