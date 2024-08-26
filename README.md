@@ -1,2 +1,3 @@
 # GoApi
- Api in Go Lang
+
+ Api in Go Lang + PostgreSQL + Docker
