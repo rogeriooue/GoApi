@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"goapi/controller"
 	"goapi/db"
 	"goapi/repository"
 	"goapi/usecase"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {

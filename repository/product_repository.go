@@ -44,8 +44,8 @@ func (pr *ProductRepository) GetProducts() ([]model.Product, error) {
 	}
 
 	if err = rows.Err(); err != nil {
-        return nil, err
-    }
+		return nil, err
+	}
 
 	return productList, nil
 }
