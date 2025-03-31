@@ -39,8 +39,6 @@ Esta API fornece operações para gerenciar produtos em um banco de dados. As op
   - Código HTTP: `500 Internal Server Error`
     - Mensagem: Ocorreu um erro ao buscar os produtos.
 
----
-
 ### 2. **Criar Produto**
 
 - Cria um novo produto no banco de dados.
